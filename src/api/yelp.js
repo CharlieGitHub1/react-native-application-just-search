@@ -1,9 +1,7 @@
-import axios from "axios";
+import { DATABASE_URL, API_KEY } from "react-native-dotenv";
 
-export default axios.create({
-  baseURL: "https://api.yelp.com/v3/businesses",
+fetch(`${DATABASE_URL}/search?term=${term}&location=${location}&limit=50`, {
   headers: {
-    Authorization:
-      "Bearer vxtiu_pKBO63CD1NCuFTpWmt91IHifXcwJRENVUmPO8rVorBHZlwA4VZBNyZoVPFVGurpEg79LU6X5AvimceLK4wGl7tpd7yGpd8cNYh582Dg2F2U9Qc50D9Va53Y3Yx",
+    Authorization: `Bearer ${API_KEY}`,
   },
 });

@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import yelp from "../api/yelp";
 
 export default () => {
-  const [restaurants, setRestaurants] = useState([]);
+  const [results, setResults] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
   const searchApi = async (searchTerm) => {
+    console.log("Hi there!");
+
     try {
       const response = await yelp.get("/search", {
         params: {
@@ -14,9 +16,9 @@ export default () => {
           location: "houston",
         },
       });
-      setRestaurants(response.data.businesses);
+      setResults(response.data.businesses);
     } catch (err) {
-      setErrorMessage("🧐 Something went wrong");
+      setErrorMessage("Something went wrong");
     }
   };
 
@@ -24,5 +26,5 @@ export default () => {
     searchApi("coffee");
   }, []);
 
-  return [searchApi, restaurants, errorMessage];
+  return [searchApi, results, errorMessage];
 };

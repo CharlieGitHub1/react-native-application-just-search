@@ -1,11 +1,18 @@
 import React, { useState } from "react";
-import useSearchResults from "../hooks/useSearchResults";
+import useResults from "../hooks/useResults";
 import { View, Text, StyleSheet } from "react-native";
 import SearchBar from "../components/SearchBar";
+import ResultList from "../components/ResultList";
 
 const SearchScreen = () => {
   const [term, setTerm] = useState("");
-  const [searchApi, restaurants, errorMessage] = useSearchResults();
+  const [searchApi, results, errorMessage] = useResults();
+
+  const filterResultsByPrice = (price) => {
+    return results.filter((result) => {
+      return result.price === price;
+    });
+  };
 
   return (
     <View>
@@ -13,12 +20,17 @@ const SearchScreen = () => {
       <SearchBar
         term={term}
         onTermChange={setTerm}
-        onTermSubmit={searchApi(term)}
+        onTermSubmit={() => searchApi(term)}
       />
       <Text style={styles.captionStyle}>
-        We have found {restaurants.length} restaurants
+        We have found {results.length} results
       </Text>
-      {errorMessage ? <Text>{errorMessage}</Text> : null}
+      <Text style={styles.captionStyle}>
+        {errorMessage ? <Text>{errorMessage}</Text> : null}
+      </Text>
+      <ResultList title="Cost Effective" results={filterResultsByPrice("$")} />
+      <ResultList title="Bit Pricer" results={filterResultsByPrice("$$")} />
+      <ResultList title="Big Spender" results={filterResultsByPrice("$$$")} />
     </View>
   );
 };
@@ -32,8 +44,8 @@ const styles = StyleSheet.create({
   },
   captionStyle: {
     fontSize: 14,
-    marginLeft: 10,
-    marginTop: 10,
+    marginLeft: 35,
+    marginTop: 5,
   },
 });
 
