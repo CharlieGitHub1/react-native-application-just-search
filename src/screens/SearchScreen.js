@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useResults from "../hooks/useResults";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import SearchBar from "../components/SearchBar";
 import ResultList from "../components/ResultList";
 
@@ -15,7 +15,7 @@ const SearchScreen = () => {
   };
 
   return (
-    <View>
+    <View style={styles.viewContainer}>
       <Text style={styles.titleStyle}>Search Screen</Text>
       <SearchBar
         term={term}
@@ -28,24 +28,35 @@ const SearchScreen = () => {
       <Text style={styles.captionStyle}>
         {errorMessage ? <Text>{errorMessage}</Text> : null}
       </Text>
-      <ResultList title="Cost Effective" results={filterResultsByPrice("$")} />
-      <ResultList title="Bit Pricer" results={filterResultsByPrice("$$")} />
-      <ResultList title="Big Spender" results={filterResultsByPrice("$$$")} />
+      <ScrollView>
+        <ResultList
+          title="Cost Effective"
+          results={filterResultsByPrice("$")}
+        />
+        <ResultList title="Bit Pricer" results={filterResultsByPrice("$$")} />
+        <ResultList title="Big Spender" results={filterResultsByPrice("$$$")} />
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  viewContainer: {
+    backgroundColor: "black",
+  },
+
   titleStyle: {
     alignSelf: "center",
     margin: 10,
     fontSize: 30,
     fontWeight: "bold",
+    color: "white",
   },
   captionStyle: {
     fontSize: 14,
-    marginLeft: 35,
+    marginLeft: 15,
     marginTop: 5,
+    color: "white",
   },
 });
 
