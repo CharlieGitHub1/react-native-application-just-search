@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
   bgStyle: {
     backgroundColor: "white",
     height: 40,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 20,
+    marginBottom: 5,
     marginHorizontal: 15,
     borderRadius: 4,
     flexDirection: "row",

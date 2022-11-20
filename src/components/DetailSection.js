@@ -8,7 +8,7 @@ const DetailSection = ({ result }) => {
       <Text style={styles.imgCaptionStyle}>{result.name}</Text>
       <Text style={styles.captionAddressStyle}>{result.location.address1}</Text>
       <Text style={styles.captionRatingReviewStyle}>
-        {result.rating} Stars, {result.review_count} Reviews
+        {result.rating} ⭐️, {result.review_count} Reviews
       </Text>
     </View>
   );

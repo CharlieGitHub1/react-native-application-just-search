@@ -1,8 +1,19 @@
 import React from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { withNavigation } from "react-navigation";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import DetailSection from "./DetailSection";
 
-const ResultList = ({ title, results }) => {
+const ResultList = ({ title, results, navigation }) => {
+  if (!results.length) {
+    return null;
+  }
+
   return (
     <View style={styles.viewBgStyle}>
       <Text style={styles.titleStyle}>{title}</Text>
@@ -13,7 +24,13 @@ const ResultList = ({ title, results }) => {
         keyExtractor={(result) => result.id}
         data={results}
         renderItem={({ item }) => {
-          return <DetailSection result={item} />;
+          return (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Detail", { id: item.id })}
+            >
+              <DetailSection result={item} />
+            </TouchableOpacity>
+          );
         }}
       />
     </View>
@@ -34,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ResultList;
+export default withNavigation(ResultList);

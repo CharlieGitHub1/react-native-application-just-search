@@ -16,15 +16,11 @@ const SearchScreen = () => {
 
   return (
     <View style={styles.viewContainer}>
-      <Text style={styles.titleStyle}>Search Screen</Text>
       <SearchBar
         term={term}
         onTermChange={setTerm}
         onTermSubmit={() => searchApi(term)}
       />
-      <Text style={styles.captionStyle}>
-        We have found {results.length} results
-      </Text>
       <Text style={styles.captionStyle}>
         {errorMessage ? <Text>{errorMessage}</Text> : null}
       </Text>
@@ -43,12 +39,13 @@ const SearchScreen = () => {
 const styles = StyleSheet.create({
   viewContainer: {
     backgroundColor: "black",
+    flex: 1,
   },
 
   titleStyle: {
     alignSelf: "center",
-    margin: 10,
-    fontSize: 30,
+    margin: 5,
+    fontSize: 25,
     fontWeight: "bold",
     color: "white",
   },
